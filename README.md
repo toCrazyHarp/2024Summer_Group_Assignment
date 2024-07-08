@@ -7,3 +7,4 @@ Good luck.
 ## Posecession Logs
 * 2024.7.5 Setting up.
 * 2024.7.5 All members joined.
+* 2024.7.5 Decide to make a web page
