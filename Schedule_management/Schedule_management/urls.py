@@ -23,4 +23,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('Info/',info_views.Info),
     path('',mainpage_views.mainpage),
+    path('Info/add/',info_views.add),
+    path('Info/edit/',info_views.edit),
+    path('Info/delete/',info_views.delete),
 ]
