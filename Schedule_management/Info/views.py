@@ -2,8 +2,12 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def Info(request):
-    return render(request,"task_lists.html")
+    from Info.models import Tasks
+    all_tasks = Tasks.objects.all()
+    return render(request,"task_lists.html",{"Tasks": all_tasks})
+
 def add(request):
+
     return render(request,"login.html")
 def delete():
     return HttpResponse("this is delete page")
