@@ -3,99 +3,100 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}">
+    <title>Informations</title>
+    <link rel="stylesheet" href="{% static 'css/tailwind.css'%}">
 </head>
 <body>
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Brand</a>
+<div class="container mx-auto px-0">
+  <div class="navbar bg-base-100 border-2 border-x-amber-600 border-y-yellow-500  rounded-lg ">
+  <div class="navbar-start">
+    <div class="dropdown">
+      <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h7" />
+        </svg>
+      </div>
+      <ul
+        tabindex="0"
+        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+        <li><a>Homepage</a></li>
+        <li><a>Portfolio</a></li>
+        <li><a>About</a></li>
+      </ul>
     </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-<div class="panel panel-default">
-  <!-- Default panel contents -->
-  <div class="panel-heading">所有日程</div>
-  <div class="panel-body">
   </div>
-
-    <div style="margin-bottom: 10px">
-        <button class="btn btn-success" onclick="add.show()">
-            添加日程
-        </button>
-    </div>
-<dialog id="add">
-    <!--这里是输入程弹窗 -->
-    <div class="input-group">
-  <span class="input-group-addon" id="basic-addon1">日程</span>
-  <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+  <div class="navbar-center">
+    <a class="btn btn-ghost text-xl">{{ Title }}</a>
+  </div>
+  <div class="navbar-end">
+    <button class="btn btn-ghost btn-circle">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-5 w-5"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+    </button>
+    <button class="btn btn-ghost btn-circle">
+      <div class="indicator">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+        </svg>
+        <span class="badge badge-xs badge-primary indicator-item"></span>
+      </div>
+    </button>
+  </div>
 </div>
-    <button onclick="add.close()">设置好了</button>
-</dialog>
-  <!-- Table -->
-  <table class="table">
-  <thead>
-  <tr>
-      <th>日程</th>
-      <th>创建时间</th>
-      <th>是否完成</th>
-  </tr>
-  </thead>
-    {% for t in Tasks %}
+</div>
+<div class="container mx-auto px-8">
+        <div class="overflow-x-auto">
+  <table class="table px-10">
+    <!-- head -->
+    <thead>
       <tr>
-          <td>{{ t.title }}</td>
-          <td>{{ t.start_time }}</td>
-          <td>{{ t.ischecked }}</td>
+        <th></th>
+        <th>任务</th>
+        <th>创建时间</th>
+        <th>是否完成</th>
+      </tr>
+    </thead>
+
+    <tbody>
+    {% for t,i in Info %}
+        <tr>
+        <th class="py-8 text-lg border ">{{ i }}</th>
+        <td class="py-8 text-lg border ">{{ t.title }}</td>
+        <td class="py-8 text-lg border ">{{ t.start_time }}</td>
+        <td class="py-8 text-lg border "> {{ t.ischecked }}</td>
       </tr>
     {% endfor %}
+    </tbody>
   </table>
+</div>
 </div>
 </body>
 </html>

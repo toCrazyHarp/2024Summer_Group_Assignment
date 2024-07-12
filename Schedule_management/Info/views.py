@@ -4,7 +4,9 @@ from django.http import HttpResponse
 def Info(request):
     from Info.models import Tasks
     all_tasks = Tasks.objects.all()
-    return render(request,"task_lists.html",{"Tasks": all_tasks})
+    Index = range(1, all_tasks.count() + 1)
+    Infomations = zip(all_tasks, Index)
+    return render(request,"task_lists.html",{"Title":"所有日程安排","Info":Infomations})
 
 def add(request):
 

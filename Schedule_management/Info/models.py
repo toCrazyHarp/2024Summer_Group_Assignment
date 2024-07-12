@@ -4,6 +4,7 @@ from django.db import models
 
 class Tasks(models.Model):
   """短期任务表"""
+  index = models.IntegerField()
   title = models.CharField(max_length=100)
   start_time = models.DateTimeField()
   ischecked=models.BooleanField(default=False)
