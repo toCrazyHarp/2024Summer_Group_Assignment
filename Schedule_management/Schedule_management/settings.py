@@ -79,9 +79,9 @@ WSGI_APPLICATION = "Schedule_management.wsgi.application"
 DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.mysql',	# Django的引擎，还可以用Oracle等
-    'NAME': 'tasks',	# 数据库名
+    'NAME': 'django_database_name',	# 数据库名
     'USER': 'root',		# 用户名
-    'PASSWORD': '348672',	# 密码
+    'PASSWORD': '@3170369791abc',	# 密码
     'HOST': 'localhost',			# 数据库服务器地址
     'PORT': 3306,		# 端口号（MySQL默认3306）
 }

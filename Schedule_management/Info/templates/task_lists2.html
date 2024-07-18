@@ -1,0 +1,30 @@
+{% extends 'parent.html' %}
+{% block title %}
+    <title> 所有任务 </title>
+{% endblock %}
+{% block body %}
+    <div class="overflow-x-auto">
+  <table class="table px-10">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th></th>
+        <th>任务</th>
+        <th>周期</th>
+      </tr>
+    </thead>
+
+    <tbody>
+    {% for t,i in Info %}
+        <tr>
+        <th class="py-8 text-lg border ">{{ i }}</th>
+        <td class="py-8 text-lg border ">{{ t.title }}</td>
+        <td class="py-8 text-lg border "> {{ t.day }}</td>
+        <td><button class="btn">编辑</button></td>
+    <td><button class="btn btn-neutral">删除</button></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

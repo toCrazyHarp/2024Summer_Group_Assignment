@@ -26,4 +26,7 @@ urlpatterns = [
     path('Info/add/',info_views.add),
     path('Info/edit/',info_views.edit),
     path('Info/delete/',info_views.delete),
+     path('Info/shorter/',info_views.shorter),
+    path('Info/longer/',info_views.longer),
+    path('Info/routine/',info_views.routine),
 ]

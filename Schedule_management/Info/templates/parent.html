@@ -8,39 +8,82 @@
     {% endblock %}
     <title>Informations</title>
     <link rel="stylesheet" href="{% static 'css/tailwind.css'%}">
+    <style>
+      .navbar {
+          position: relative;
+        }
+      .btn.btn-primary {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+        }
+        footer {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          background-color: white;
+          padding: 10px;
+          text-align: center;  /* 水平居中 */
+        }
+        footer ul {
+          display: inline-block;  /* 使列表在父元素（页脚）中水平居中 */
+        }
+      </style>
 </head>
 <body>
 <div class="container mx-auto px-0">
   <div class="navbar bg-base-100 border-2 border-x-amber-600 border-y-yellow-500  rounded-lg ">
-  <div class="navbar-start">
-    <div class="dropdown">
-      <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-5 w-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor">
-          <path
+   <div class="navbar-start">
+     <div class="btn-group" role="group" aria-label="...">
+      <div class="dropdown">
+        <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+          <svg
+           xmlns="http://www.w3.org/2000/svg"
+           class="h-5 w-5"
+           fill="none"
+           viewBox="0 0 24 24"
+           stroke="currentColor">
+           <path
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
             d="M4 6h16M4 12h16M4 18h7" />
-        </svg>
-      </div>
-      <ul
+         </svg>
+       </div>
+       <ul
         tabindex="0"
         class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-        <li><a>Homepage</a></li>
-        <li><a>Portfolio</a></li>
-        <li><a>About</a></li>
-      </ul>
-    </div>
+        <li><a href="/">主页</a></li>
+        <li><a>关于</a></li>
+       </ul>
+     </div>
+   </div>
   </div>
+
   <div class="navbar-center">
     <a class="btn btn-ghost text-xl">{{ Title }}</a>
   </div>
   <div class="navbar-end">
+   <!-- Open the modal using ID.showModal() method -->
+<button class="btn" onclick="my_modal_1.showModal()">添加日程</button>
+<dialog id="my_modal_1" class="modal" style="width: 300px; height: 160px;">
+  <div class="modal-box">
+    <h2 class="text-lg font-bold">选择你要添加的日程类型</h2>
+    <select class="select select-accent w-full max-w-xs" style="width: 300px; height: 50px; font-size: 18px; margin: 0 auto; display: block;">
+      <option disabled selected>选择日程类型</option>
+      <option>短期</option>
+      <option>长期</option>
+      <option>周期</option>
+    </select>
+    <div class="modal-action" style="position: absolute; bottom: 20px; right: 20px;">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>
     <button class="btn btn-ghost btn-circle">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -71,9 +114,7 @@
         </svg>
         <span class="badge badge-xs badge-primary indicator-item"></span>
       </div>
-    </button>
   </div>
-</div>
 </div>
 
 <div class="container mx-auto px-8">
@@ -81,5 +122,29 @@
 
     {% endblock %}
 </div>
+
+<footer>
+  <ul class="menu menu-horizontal bg-base-200">
+    <li><a href="/Info/shorter/" class="btn btn-default">短期</a></li>
+    <li><a href="/Info/longer/" class="btn btn-default">长期</a></li>
+    <li><a href="/Info/routine/" class="btn btn-default">周期</a></li>
+  </ul>
+</footer>
+<script>
+  function openModal() {
+    document.getElementById("myModal").style.display = "block";
+  }
+
+  function closeModal() {
+    document.getElementById("myModal").style.display = "none";
+  }
+
+  window.onclick = function (event) {
+    if (event.target == document.getElementById("myModal")) {
+      closeModal();
+    }
+  };
+</script>
 </body>
+
 </html>
