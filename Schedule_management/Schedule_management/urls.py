@@ -22,10 +22,7 @@ from Info import views as info_views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('Info/',info_views.Info),
-    path('',mainpage_views.mainpage),
-    path('Info/add/',info_views.add),
-    path('Info/edit/',info_views.edit),
-    path('Info/delete/',info_views.delete),
+    path('',info_views.mainpage),
      path('Info/shorter/',info_views.shorter),
     path('Info/longer/',info_views.longer),
     path('Info/routine/',info_views.routine),

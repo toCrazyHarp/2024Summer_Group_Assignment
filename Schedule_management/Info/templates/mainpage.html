@@ -1,0 +1,76 @@
+{% extends 'parent.html' %}
+{% load static %}
+{% block title %}
+    <title> 主页 </title>
+{% endblock %}
+{% block body %}
+    <div class="grid grid-cols-3 gap-4">
+    <div class="container mx-auto">
+        <div class="card card-side bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title" id="currentYear"></h2>
+        <p id="currentDate"></p>
+        <!-- 移除了按钮部分，因为它与显示当前时间无关 -->
+      </div>
+    </div>
+    </div>
+    <div class="col-span-2">
+         <div class="card card-side bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">每日一句</h2>
+          <p>这里是一条名言{{ sentences }}</p>
+      </div>
+    </div>
+    <br>
+    </div>
+     <div class = "container mx-auto px-8 shadow-xl col-start-1 col-end-3 " >
+        <div id="hotchart" style="width: 900px;height:300px;"></div>
+    </div>
+    <div>
+         <div class="card card-side bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">今日目标</h2>
+          <p>如果你不知道做什么的话{{ randomtarget }}</p>
+      </div>
+    </div>
+    </div>
+    <div class="container col-start-1 col-end-4">
+         <div class="card card-side bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title">全部待办事项</h2>
+          <p>任务1</p>
+          <p>任务2</p>
+      </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script src="{% static 'js/echarts.min.js' %}"></script>
+    <script src="{% static 'js/hotchart.js' %}"></script>
+     <script>
+       document.addEventListener('DOMContentLoaded', function() {
+    // 获取显示日期的元素
+    var dateElement = document.getElementById('currentDate');
+    var dateyear= document.getElementById('currentYear')
+
+    // 定义一个函数来更新日期
+    function updateDate() {
+        var now = new Date();
+        var year = now.getFullYear();
+        var month = String(now.getMonth() + 1).padStart(2, '0'); // 月份是从0开始的，所以要+1，并用0填充
+        var day = String(now.getDate()).padStart(2, '0'); // 日期也要用0填充
+
+        // 拼接并更新日期
+        dateElement.textContent = `${month}月${day}日`;
+        dateyear.textContent = `现在是${year}年`
+    }
+
+    // 首次加载时更新日期
+    updateDate();
+
+    // 每隔一秒更新一次日期（可选，取决于您的需求）
+    setInterval(updateDate, 1000);
+});
+    </script>
+{% endblock %}

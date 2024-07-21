@@ -25,8 +25,6 @@ def routine(request):
 def add(request):
 
     return render(request,"window1.html")
-def delete():
-    return HttpResponse("this is delete page")
-def edit(request):
-    return HttpResponse("this is edit page")
+def mainpage(request):
+    return render(request ,"mainpage.html")
 
