@@ -19,5 +19,8 @@ class longperiodtasks(models.Model):
 class routinetasks(models.Model):
   """周期性任务表"""
   title = models.CharField(max_length=100)
-  mode = models.CharField(max_length=1)
-  day = models.IntegerField
+  mode = models.IntegerField()
+
+class famoussentencestasks(models.Model):
+  sentences=models.CharField(max_length=100)
+  author =models.CharField(max_length=100)

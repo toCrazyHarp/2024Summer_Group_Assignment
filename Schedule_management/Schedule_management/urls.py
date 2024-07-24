@@ -22,8 +22,11 @@ from Info import views as info_views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('Info/',info_views.Info),
-    path('',info_views.mainpage),
-     path('Info/shorter/',info_views.shorter),
-    path('Info/longer/',info_views.longer),
-    path('Info/routine/',info_views.routine),
+    path('',info_views.mainpage, name='main' ),
+     path('Info/shorter/',info_views.shorter, name='shorter'),
+    path('Info/longer/',info_views.longer,name='longer'),
+    path('Info/routine/',info_views.routine,name='routine'),
+    path('get-data/', info_views.get_data),
+    path('search_results/', info_views.search_results),
+    path('add-task/', info_views.add_task),
 ]

@@ -1,51 +1,9 @@
 var chartDom = document.getElementById('hotchart');
 var myChart = echarts.init(chartDom);
 var option;
-var color=7
-function generatePieces(maxValue, colorBox) {
-    var pieces = [];
-    var quotient = 1;
-    var temp = {};
-    temp.lt = 1;
-    temp.label = '0';
-    temp.color = colorBox[0];
-    pieces.push(temp);
+var color=8
 
-    if (maxValue && maxValue >= color) {
 
-        quotient = Math.floor(maxValue / color);
-
-        for (var i = 1; i <= color; i++) {
-            var temp = {};
-            if (i == 1) {
-                temp.gte = 1;
-            } else {
-                temp.gte = quotient * (i - 1);
-            }
-            temp.lte = quotient * i;
-            temp.color = colorBox[i];
-            // temp.label = '等级'+i;
-            pieces.push(temp);
-        }
-    }
-
-    return pieces;
-}
-function getVirtualData(year) {
-  const date = +echarts.time.parse(year + '-01-01');
-  const end = +echarts.time.parse(+year + 1 + '-01-01');
-  const dayTime = 3600 * 24 * 1000;
-  const data = [];
-  for (let time = date; time < end; time += dayTime) {
-    data.push([
-      echarts.time.format(time, '{yyyy}-{MM}-{dd}', false),
-      Math.floor(Math.random() * 10000)
-    ]);
-  }
-  return data;
-}
-var maxValue=10000
-var colorBox = ['white', '#9de2b5', '#87d2a1', '#70c38c', '#5ab378','#43a464','#2d9450','#16853b'];
 option = {
   title: {
     top: 20,
@@ -58,7 +16,7 @@ option = {
   tooltip: {},
   visualMap: {
             min: 0,
-            max: maxValue,
+            max: 50,
             type: 'piecewise',
             align: 'left',
             orient: 'horizontal',  //vertical  horizontal
@@ -66,24 +24,49 @@ option = {
             bottom: '30',
             textGap: 5,
             itemGap: 5,
-            pieces: generatePieces(maxValue, colorBox)
+            pieces: [{gt: 0, lte: 6, color: '#9de2b5'}, // 注意：这里使用了 gt 而不是 lt，因为 lt 已经用于第一个元素
+
+    {gt: 6, lte: 12, color: '#87d2a1'},
+
+    {gt: 12, lte: 18, color: '#70c38c'},
+
+    {gt: 18, lte: 24, color: '#5ab378'},
+
+    {gt: 24, lte: 30, color: '#43a464'},
+
+    {gt: 30, lte: 36, color: '#2d9450'},
+
+    {gt: 36, lte: 42, color: '#16853b'},]
         },
   calendar: {
     top: 100,
     left: 30,
     right: 30,
     cellSize: ['auto', '16'],
-    range: '2016',
+    range: '2024',
     itemStyle: {
       borderWidth: 0.5
     },
-    yearLabel: { show: true }
+    yearLabel: { show: false }
   },
   series: {
     type: 'heatmap',
     coordinateSystem: 'calendar',
-    data: getVirtualData('2016')
+    data: []
   }
 };
-
 option && myChart.setOption(option);
+
+ fetch('/get-data/')
+            .then(response => response.json())
+            .then(data => {
+                // 将数据转换为ECharts需要的时间戳格式
+                const newData = data.map(item => [echarts.time.parse(item[0]), item[1]]);
+                // 更新图表数据
+                myChart.setOption({
+                    series: [{
+                        data: newData
+                    }]
+                });
+            })
+            .catch(error => console.error('Error:', error));

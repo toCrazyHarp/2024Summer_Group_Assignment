@@ -1,33 +1,68 @@
 {% extends 'parent.html' %}
 {% block title %}
     <title> 所有任务 </title>
+
 {% endblock %}
 {% block body %}
-    <div class="overflow-x-auto">
-  <table class="table px-10">
-    <!-- head -->
-    <thead>
-      <tr>
-        <th></th>
-        <th>任务</th>
-        <th>创建时间</th>
-        <th>是否完成</th>
-          <th>操作</th>
-      </tr>
-    </thead>
+    <div class="container mx-auto w-1/3">
+        <!-- Open the modal using ID.showModal() method -->
+        <button class="btn" onclick="my_modal_1.showModal()">新建日程</button>
+        <dialog id="my_modal_1" class="modal">
+            <div class="card bg-base-100 image-full w-96 shadow-xl">
+                <div class="card-body">
+                    <h2 class="card-title">添加新日程</h2>
+                    <form method="post" action="/Info/shorter/">
+                        {% csrf_token %}
+                        <div class="modal-box">
+                            <div class="input-group">
+                                <label for="title">标题:</label>
+                                <input type="text" id="title" name="title" required>
+                            </div>
+                        </div>
+                        <div class="card-actions justify-end">
+                            <div class="modal-action">
+                                <button class="btn btn-secondary" type="submit">添加</button>
+                                <button type="button" class="btn  btn-secondary"
+                                        onclick="document.getElementById('my_modal_1').close();">关闭
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
-    <tbody>
-    {% for t,i in Info %}
-        <tr>
-        <th class="py-8 text-lg border ">{{ i }}</th>
-        <td class="py-8 text-lg border ">{{ t.title }}</td>
-        <td class="py-8 text-lg border ">{{ t.start_time }}</td>
-        <td class="py-8 text-lg border "> {{ t.ischecked }}</td>
-        <td><button class="btn">编辑</button></td>
-    <td><button class="btn btn-neutral">删除</button></td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
-</div>
+
+        </dialog>
+        <div class="overflow-x-auto ">
+            <table class="table ">
+                <!-- head -->
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>任务</th>
+                    <th>创建时间</th>
+                    <th>是否完成</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for t,i in Info %}
+                    <tr>
+                        <th class="py-4 text-lg border ">{{ i }}</th>
+                        <td class="py-4 text-lg border ">{{ t.title }}</td>
+                        <td class="py-4 text-lg border ">{{ t.start_time }}</td>
+                        <td class="py-4 text-lg border "> {{ t.ischecked }}</td>
+                        <td>
+                            <button class="btn ">编辑</button>
+                            <button class="btn btn-neutral pl-10">删除</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+{% block script %}
 {% endblock %}

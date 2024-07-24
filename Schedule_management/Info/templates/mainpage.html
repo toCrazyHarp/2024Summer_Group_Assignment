@@ -5,72 +5,104 @@
 {% endblock %}
 {% block body %}
     <div class="grid grid-cols-3 gap-4">
-    <div class="container mx-auto">
-        <div class="card card-side bg-base-100 shadow-xl">
-      <div class="card-body">
-        <h2 class="card-title" id="currentYear"></h2>
-        <p id="currentDate"></p>
-        <!-- 移除了按钮部分，因为它与显示当前时间无关 -->
-      </div>
+        <div class="col-span-1">
+            <div class="card card-side bg-base-100 shadow-xl " style="height: 200px;">
+                <div class="card-body">
+                    <h2 class="card-title" style="font-size: 25px;">今天是&nbsp;&nbsp;<span id="currentYear"></span>&nbsp;&nbsp;年
+                    </h2>
+                    <p class="card-normal" style="font-size: 26px;"><span id="currentDate"></span>&nbsp;&nbsp;月&nbsp;&nbsp;<span
+                            id="currentDay"></span>&nbsp;&nbsp;日</p>
+                    <!-- 移除了按钮部分，因为它与显示当前时间无关 -->
+                </div>
+            </div>
+        </div>
+        <div class=" col-span-2 ">
+            <div class="card card-side bg-base-100 shadow-xl " style="height: 200px;">
+                <div class="card-body">
+                    <h2 class="card-title" style="font-size: 28px;">每日一句</h2>
+                    <p style="font-size: 24px; text-align: center;">{{ sentences.sentences }}</p>
+                    <p style="font-size: 24px; text-align: right;">—— {{ sentences.author }}&nbsp;&nbsp;&nbsp;</p>
+                </div>
+            </div>
+            <br>
+        </div>
+        <div class="container bg-base-100 mx-auto px-8 shadow-xl col-start-1 col-end-3 ">
+            <div id="hotchart" style=" display: flex; width: 50vw; height: 300px;"></div>
+        </div>
+        <div>
+            <div class="card card-side bg-base-100 shadow-xl" style="height: 300px;">
+                <div class="card-body">
+                    <h2 class="card-title">今日目标</h2>
+                    <h2 style="color: gray">如果你不知道做什么的话</h2>
+                    <div class="card-normal ">
+                        {% for i in randomtasks %}
+                            <input type="checkbox" checked="checked" class="checkbox"/>
+                            <span class="label-text">&nbsp;&nbsp;{{ i.title }}<br></span>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div class="flex flex-direction: column; w-full bg-base-100 flex-col rounded shadow-2xl" style="flex-direction: column;">
+        <h2 style="font-size: 50px;width: 100%;text-align: center;">全部待办事项</h2>
+        <div style="height: 28%; /* 设置容器的高度 */padding: 10px; /* 可选：为内容添加内边距 */width: 100%">
+            <div class="overflow-x-auto ">
+        <table class="table px-10">
+            <!-- head -->
+            <thead>
+            <tr>
+                <th></th>
+                <th>任务</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in tasks %}
+                <tr>
+                    <th class="py-4 text-lg border "><input type="checkbox" checked="checked" class="checkbox"/></th>
+                    <td class="py-4 text-lg border ">{{ i.title }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
-    <div class="col-span-2">
-         <div class="card card-side bg-base-100 shadow-xl">
-      <div class="card-body">
-        <h2 class="card-title">每日一句</h2>
-          <p>这里是一条名言{{ sentences }}</p>
-      </div>
-    </div>
-    <br>
-    </div>
-     <div class = "container mx-auto px-8 shadow-xl col-start-1 col-end-3 " >
-        <div id="hotchart" style="width: 900px;height:300px;"></div>
-    </div>
-    <div>
-         <div class="card card-side bg-base-100 shadow-xl">
-      <div class="card-body">
-        <h2 class="card-title">今日目标</h2>
-          <p>如果你不知道做什么的话{{ randomtarget }}</p>
-      </div>
-    </div>
-    </div>
-    <div class="container col-start-1 col-end-4">
-         <div class="card card-side bg-base-100 shadow-xl">
-      <div class="card-body">
-        <h2 class="card-title">全部待办事项</h2>
-          <p>任务1</p>
-          <p>任务2</p>
-      </div>
-    </div>
-    </div>
+
+        </div>
     </div>
 {% endblock %}
 {% block script %}
     <script src="{% static 'js/echarts.min.js' %}"></script>
     <script src="{% static 'js/hotchart.js' %}"></script>
-     <script>
-       document.addEventListener('DOMContentLoaded', function() {
-    // 获取显示日期的元素
-    var dateElement = document.getElementById('currentDate');
-    var dateyear= document.getElementById('currentYear')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // 获取显示日期的元素
+            var dateElement = document.getElementById('currentDate');
+            var dateyear = document.getElementById('currentYear');
+            var dateday = document.getElementById('currentDay');
 
-    // 定义一个函数来更新日期
-    function updateDate() {
-        var now = new Date();
-        var year = now.getFullYear();
-        var month = String(now.getMonth() + 1).padStart(2, '0'); // 月份是从0开始的，所以要+1，并用0填充
-        var day = String(now.getDate()).padStart(2, '0'); // 日期也要用0填充
+            // 定义一个函数来更新日期
+            function updateDate() {
+                var now = new Date();
+                var year = now.getFullYear();
+                var month = String(now.getMonth() + 1).padStart(2, '0'); // 月份是从0开始的，所以要+1，并用0填充
+                var day = String(now.getDate()).padStart(2, '0'); // 日期也要用0填充
 
-        // 拼接并更新日期
-        dateElement.textContent = `${month}月${day}日`;
-        dateyear.textContent = `现在是${year}年`
-    }
+                // 拼接并更新日期
+                dateElement.textContent = `${month}`;
+                dateElement.style.fontSize = "50px";
+                dateday.textContent = `${day}`;
+                dateday.style.fontSize = "50px";
+                dateyear.style.fontSize = "50px";
+                dateyear.textContent = `${year}`;
+            }
 
-    // 首次加载时更新日期
-    updateDate();
+            // 首次加载时更新日期
+            updateDate();
 
-    // 每隔一秒更新一次日期（可选，取决于您的需求）
-    setInterval(updateDate, 1000);
-});
+            // 每隔一秒更新一次日期（可选，取决于您的需求）
+            setInterval(updateDate, 1000);
+        });
     </script>
 {% endblock %}
